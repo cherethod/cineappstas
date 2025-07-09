@@ -13,8 +13,11 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [registerUser, setRegisterUser] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  
+  // Debug: Verificar en consola de producción
+console.log("Netlify Environment Variables:", {
+  VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
+  VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY
+});
 
   // Cargar usuario desde localStorage al iniciar
   useEffect(() => {
