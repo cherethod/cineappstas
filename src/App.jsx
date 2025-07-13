@@ -71,10 +71,6 @@ function App() {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    // mostrar resultados de búsqueda al cambiar el query
-    if (query) {
-      searchMovies(query)
   // Verificar la sesión del usuario en Supabase
   const verifyUserSession = async (userId) => {
     try {
