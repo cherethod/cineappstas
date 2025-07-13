@@ -9,6 +9,7 @@ const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
 
 export const UseSearch = () => {
   const [selectedSearch, setSelectedSearch] = useState("movies");
+  const [queryResponse, setQueryResponse] = useState(null);
   const searchQuery = useRef(null);
 
   const handleSearchQueryChange = (e) => {
@@ -25,6 +26,7 @@ export const UseSearch = () => {
       getPopularMovies()
         .then((data) => {
           console.log("Películas populares:", data);
+            setQueryResponse(...data.results);
         })
         .catch((error) => {
           console.error("Error obteniendo películas populares:", error);
@@ -33,6 +35,7 @@ export const UseSearch = () => {
       getPopularTvShows()
         .then((data) => {
           console.log("Series populares:", data);
+            setQueryResponse(...data.results);
         })
         .catch((error) => {
           console.error("Error obteniendo series populares:", error);
@@ -134,5 +137,6 @@ export const UseSearch = () => {
     getTvShowDetails,
     getPopularMovies,
     getPopularTvShows,
+    queryResponse
   };
 };

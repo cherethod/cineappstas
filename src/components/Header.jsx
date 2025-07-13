@@ -1,19 +1,7 @@
 import { SearchButtons } from "./SearchButtons";
-import { UseSearch } from "./hooks/UseSearch";
 
-export const Header = ({ currentUser, handleLogout }) => {
-  const {
-    selectedSearch,
-    setSelectedSearch,
-    handleSearchQueryChange,
-    searchQuery,
-    searchMovies,
-    searchTvShows,
-    getMovieDetails,
-    getTvShowDetails,
-    getPopularMovies,
-    getPopularTvShows
-  } = UseSearch();
+export const Header = ({ currentUser, handleLogout, selectedSearch, setSelectedSearch, searchQuery, handleSearchQueryChange }) => {
+
   return (
     <header className="w-full min-h-20 flex items-center bg-indigo-900 text-white">
       <h1 className="text-5xl font-bold justify-self-center ml-6">
