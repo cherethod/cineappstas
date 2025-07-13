@@ -15,9 +15,9 @@ export default defineConfig(({ mode }) => {
       // Inyectar variables explícitamente
       'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL),
       'import.meta.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(env.VITE_SUPABASE_ANON_KEY),
-      'import.meta.env.VITE_TDBM_API_URL': JSON.stringify(env.VITE_TDBM_API_URL),
-      'import.meta.env.VITE_TDBM_API_TOKEN': JSON.stringify(env.VITE_TDBM_API_TOKEN),
-      'import.meta.env.VITE_TDBM_API_KEY': JSON.stringify(env.VITE_TDBM_API_KEY),
+      'import.meta.env.VITE_TDBM_API_URL': JSON.stringify(env.VITE_TMDB_API_URL),
+      'import.meta.env.VITE_TDBM_API_TOKEN': JSON.stringify(env.VITE_TMDB_API_TOKEN),
+      'import.meta.env.VITE_TDBM_API_KEY': JSON.stringify(env.VITE_TMDB_API_KEY),
       
       // Debug: Verificar en consola de producción
       'import.meta.env.NETLIFY_DEBUG': JSON.stringify('true')
