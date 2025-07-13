@@ -3,6 +3,10 @@ import { createClient } from "@supabase/supabase-js";
 import bcrypt from 'bcryptjs';
 import { UserLogin } from './components/UserLogin';
 import { UserRegister } from './components/UserRegister';
+import {
+  searchTvShows,
+  searchMovies,
+} from './components/services/tdbmAPI';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL, 
@@ -13,11 +17,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [registerUser, setRegisterUser] = useState(false);
   const [loading, setLoading] = useState(true);
-  // Debug: Verificar en consola de producción
-console.log("Netlify Environment Variables:", {
-  VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
-  VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY
-});
 
   // Cargar usuario desde localStorage al iniciar
   useEffect(() => {
@@ -45,6 +44,25 @@ console.log("Netlify Environment Variables:", {
     loadUser();
   }, []);
 
+  useEffect(() => {
+    // Verificar si el usuario actual es válido al cambiar
+    if (currentUser) {
+      verifyUserSession(currentUser.id)
+        .then(isValid => {
+          console.log('Usuario verificado:', isValid);
+          searchMovies('Inception');
+          if (!isValid) {
+            setCurrentUser(null);
+            localStorage.removeItem('currentUser');
+          }
+        })
+        .catch(error => {
+          console.error('Error verificando sesión del usuario:', error);
+          setCurrentUser(null);
+          localStorage.removeItem('currentUser');
+        });
+    }
+  }, [currentUser]);
   // Verificar la sesión del usuario en Supabase
   const verifyUserSession = async (userId) => {
     try {
@@ -66,7 +84,7 @@ console.log("Netlify Environment Variables:", {
     setLoading(true);
     
     try {
-      // 1. Buscar usuario por nombre
+      // Buscar usuario por nombre
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('*')
@@ -77,19 +95,19 @@ console.log("Netlify Environment Variables:", {
         throw new Error('Usuario no encontrado');
       }
 
-      // 2. Verificar contraseña
+      // Verificar contraseña
       const passwordMatch = await bcrypt.compare(password, userData.password_hash);
       if (!passwordMatch) {
         throw new Error('Contraseña incorrecta');
       }
 
-      // 3. Actualizar última actividad
+      // Actualizar última actividad
       await supabase
         .from('users')
         .update({ last_active: new Date().toISOString() })
         .eq('id', userData.id);
 
-      // 4. Crear objeto de usuario seguro (sin password_hash)
+      // Crear objeto de usuario seguro (sin password_hash)
       const safeUser = {
         id: userData.id,
         username: userData.username,
@@ -97,7 +115,7 @@ console.log("Netlify Environment Variables:", {
         created_at: userData.created_at
       };
 
-      // 5. Guardar en estado y localStorage
+      // Guardar en estado y localStorage
       setCurrentUser(safeUser);
       localStorage.setItem('currentUser', JSON.stringify(safeUser));
       
@@ -155,7 +173,9 @@ console.log("Netlify Environment Variables:", {
             </button>
           </div>
           
-          {/* Aquí iría el contenido principal de tu app */}
+          {
+          // TODO: CONTENTO PRINCIPAL DE LA APLICACIÓN
+          }
           <div className='p-4 text-center bg-gray-50 rounded-lg'>
             <h3 className='text-lg font-medium'>Bienvenido a CineAppstas</h3>
             <p className='mt-2 text-gray-600'>
