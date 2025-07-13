@@ -51,8 +51,13 @@ function App() {
       verifyUserSession(currentUser.id)
         .then(isValid => {
           console.log('Usuario verificado:', isValid);
-          let newQuery = searchTvShows('Breaking Bad');
-          setQuery(newQuery);
+         searchTvShows('Breaking Bad')
+         .then(data => {
+           console.log('Resultados de Breaking Bad:', data);
+          })
+          .catch(error => {
+            console.error('Error buscando Breaking Bad:', error);
+          });
           if (!isValid) {
             setCurrentUser(null);
             localStorage.removeItem('currentUser');
@@ -65,6 +70,11 @@ function App() {
         });
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    // mostrar resultados de búsqueda al cambiar el query
+    if (query) {
+      searchMovies(query)
   // Verificar la sesión del usuario en Supabase
   const verifyUserSession = async (userId) => {
     try {
