@@ -26,7 +26,7 @@ export const UseSearch = () => {
       getPopularMovies()
         .then((data) => {
           console.log("Películas populares:", data);
-            setQueryResponse(...data.results);
+            setQueryResponse(data.results);
         })
         .catch((error) => {
           console.error("Error obteniendo películas populares:", error);
@@ -35,7 +35,7 @@ export const UseSearch = () => {
       getPopularTvShows()
         .then((data) => {
           console.log("Series populares:", data);
-            setQueryResponse(...data.results);
+            setQueryResponse(data.results);
         })
         .catch((error) => {
           console.error("Error obteniendo series populares:", error);
