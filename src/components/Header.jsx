@@ -1,12 +1,19 @@
 import { SearchButtons } from "./SearchButtons";
 import { UseSearch } from "./hooks/UseSearch";
 
-
-export const Header = ({
-  currentUser,
-  handleLogout
-}) => {
-  const {selectedSearch, setSelectedSearch, handleSearchQueryChange, searchQuery} = UseSearch()
+export const Header = ({ currentUser, handleLogout }) => {
+  const {
+    selectedSearch,
+    setSelectedSearch,
+    handleSearchQueryChange,
+    searchQuery,
+    searchMovies,
+    searchTvShows,
+    getMovieDetails,
+    getTvShowDetails,
+    getPopularMovies,
+    getPopularTvShows
+  } = UseSearch();
   return (
     <header className="w-full min-h-20 flex items-center bg-indigo-900 text-white">
       <h1 className="text-5xl font-bold justify-self-center ml-6">
@@ -28,10 +35,10 @@ export const Header = ({
             `}
             onChange={(e) => handleSearchQueryChange(e)}
           />
-        <SearchButtons
-          selectedSearch={selectedSearch}
-          setSelectedSearch={setSelectedSearch}
-        />
+          <SearchButtons
+            selectedSearch={selectedSearch}
+            setSelectedSearch={setSelectedSearch}
+          />
         </div>
       </form>
       <div className="flex items-center gap-4 ml-auto mr-6 ">
