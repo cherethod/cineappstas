@@ -7,6 +7,7 @@ import {
   searchTvShows,
   searchMovies,
 } from './components/services/tdbmAPI';
+import { MainApp } from './components/MainApp';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL, 
@@ -45,8 +46,8 @@ function App() {
     loadUser();
   }, []);
 
+  // Verificar si el usuario actual es válido al cambiar `currentUser`
   useEffect(() => {
-    // Verificar si el usuario actual es válido al cambiar
     if (currentUser) {
       verifyUserSession(currentUser.id)
         .then(isValid => {
@@ -154,43 +155,19 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col items-center gap-8 justify-center min-h-screen bg-gray-100'>
-      <h1 className='text-5xl font-bold text-indigo-700'>CineAppstas</h1>
+    <div className={`flex flex-col items-center gap-8 min-h-screen bg-gray-100 ${!currentUser ? 'justify-center' : ''}`}>
+     
       
       {currentUser ? (
-        <div className='w-full max-w-md p-6 bg-white rounded-lg shadow-md'>
-          <div className='flex items-center justify-between mb-6'>
-            <div className='flex items-center gap-3'>
-              <img 
-                src={currentUser.avatar_url} 
-                alt={currentUser.username} 
-                className='w-12 h-12 rounded-full'
-              />
-              <div>
-                <h2 className='text-xl font-semibold'>{currentUser.username}</h2>
-                <p className='text-sm text-gray-500'>
-                  Miembro desde {new Date(currentUser.created_at).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-            <button 
-              onClick={handleLogout}
-              className='px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600'
-            >
-              Cerrar sesión
-            </button>
-          </div>
-          
-          {
-          // TODO: CONTENTO PRINCIPAL DE LA APLICACIÓN
-          }
-          <div className='p-4 text-center bg-gray-50 rounded-lg'>
-            <h3 className='text-lg font-medium'>Bienvenido a CineAppstas</h3>
-            <p className='mt-2 text-gray-600'>
-              Aquí podrás gestionar tus películas y series favoritas
-            </p>
-          </div>
-        </div>
+        <>
+     
+       <MainApp 
+          currentUser={currentUser}
+          handleLogout={handleLogout}
+          setCurrentUser={setCurrentUser}
+          setQuery={setQuery}
+       />  
+        </>
       ) : registerUser ? (
         <UserRegister
           setCurrentUser={setCurrentUser}
