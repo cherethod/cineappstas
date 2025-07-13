@@ -40,7 +40,7 @@ export const MainApp = ({
         queryResponse && queryResponse.length > 0 && searchQuery.current === null? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
             {queryResponse.map((item) => (
-              <div key={item.id} className="bg-white p-4 rounded shadow flex flex-col h-full">
+              <div key={item.id} className="bg-white p-4 rounded shadow flex flex-col h-full hover:shadow-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300">
                 <h4 className="text-xl font-bold">{item.title || item.name}</h4>
                 <p>{item.overview}</p>
                 <img
