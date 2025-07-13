@@ -3,10 +3,6 @@ import { createClient } from "@supabase/supabase-js";
 import bcrypt from 'bcryptjs';
 import { UserLogin } from './components/UserLogin';
 import { UserRegister } from './components/UserRegister';
-import {
-  searchTvShows,
-  searchMovies,
-} from './components/services/tdbmAPI';
 import { MainApp } from './components/MainApp';
 
 const supabase = createClient(
