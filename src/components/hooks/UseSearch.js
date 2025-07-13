@@ -8,7 +8,7 @@ const API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN;
 
 
 
- const UseSearch = () => {
+export const UseSearch = () => {
   const [selectedSearch, setSelectedSearch] = useState("movies");
   const searchQuery = useRef(null);
 
