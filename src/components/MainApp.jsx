@@ -84,7 +84,7 @@ export const MainApp = ({
               <div
                 key={item.id}
                 onClick={() => setActiveItem(item)}
-                className="bg-gray-800 rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition duration-300 hover:scale-105"
+                className="flex flex-col bg-gray-800 rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition duration-300 hover:scale-105"
               >
                 {item.poster_path ? (
                   <img
