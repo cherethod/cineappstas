@@ -42,7 +42,7 @@ export const MainApp = ({
             {queryResponse.map((item) => (
               <div key={item.id} className="relative bg-white p-4 rounded shadow flex flex-col h-full hover:shadow-lg hover:bg-gray-100 hover:scale-105 hover:[&>p]:opacity-100 hover:[&>p]:w-full hover:[&>p]:h-full transition-all duration-300">
                 <h4 className="text-xl font-bold">{item.title || item.name}</h4>
-                <p className="absolute top-0 left-0 h-0 w-0 opacity-0 bg-black/90 text-white flex items-center">{item.overview}</p>
+                <p className="absolute top-0 left-0 h-0 w-0 opacity-0 bg-black/70 text-white flex items-center">{item.overview}</p>
                 <img
                   src={getFullImageUrl(item.poster_path)}
                   alt={item.title || item.name}
