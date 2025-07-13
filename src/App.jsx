@@ -52,13 +52,7 @@ function App() {
       verifyUserSession(currentUser.id)
         .then(isValid => {
           console.log('Usuario verificado:', isValid);
-         searchTvShows('Breaking Bad')
-         .then(data => {
-           console.log('Resultados de Breaking Bad:', data);
-          })
-          .catch(error => {
-            console.error('Error buscando Breaking Bad:', error);
-          });
+        
           if (!isValid) {
             setCurrentUser(null);
             localStorage.removeItem('currentUser');
