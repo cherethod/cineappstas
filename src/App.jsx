@@ -17,6 +17,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [registerUser, setRegisterUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState(null);
 
   // Cargar usuario desde localStorage al iniciar
   useEffect(() => {
@@ -50,7 +51,8 @@ function App() {
       verifyUserSession(currentUser.id)
         .then(isValid => {
           console.log('Usuario verificado:', isValid);
-          searchMovies('Inception');
+          let newQuery = searchTvShows('Breaking Bad');
+          setQuery(newQuery);
           if (!isValid) {
             setCurrentUser(null);
             localStorage.removeItem('currentUser');
